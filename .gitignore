@@ -1,0 +1,84 @@
+# ОСНОВНОЕ
+bin/
+obj/
+*.log
+*.vspscc
+.vs/
+.vscode/
+.idea/
+.DS_Store
+
+# ФАЙЛЫ КОМПИЛЯЦИИ
+*.exe
+*.dll
+*.pdb
+*.cache
+*.ilk
+*.log
+*.suo
+*.user
+*.userossc
+*.sln.docstates
+*.ncb
+*.dbmdl
+*.psess
+*.sdf
+
+# ПАКЕТЫ
+packages/
+
+# .NET
+project.lock.json
+project.assets.json
+artifacts/
+.terraform/
+*.db
+
+# ENTITY FRAMEWORK MIGRATIONS
+Migrations/
+
+# SECRETS (данные пользователя, API-ключи и конфиги)
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+.env
+
+# VISUAL STUDIO, RIDER И REPL
+*.suo
+*.ntvs*
+*.njsproj
+*.sln.cache
+*.sln.ide
+*.csproj.user
+.idea/
+.vscode/
+.vs/
+
+# PYTHON, JUPYTER (если используются)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+
+# LOGS
+logs/
+*.log
+*.tlog
+*.trace
+*.pid
+*.prof
+
+# DOCKER
+**/Dockerfile
+**/docker-compose*
+.dockerignore
+
+# TEMP FILES
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swn
+*.swo
+*.swd
