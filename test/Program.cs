@@ -17,12 +17,7 @@ namespace test
 
 
             // Add services to the container.
-            var logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(builder.Configuration)
-                .Enrich.FromLogContext()
-                .CreateLogger();
-            builder.Logging.ClearProviders();
-            builder.Logging.AddSerilog(logger);
+            builder.AddSerilogLogging();
 
             builder.Services.AddEntityFramework(builder.Configuration);
 
