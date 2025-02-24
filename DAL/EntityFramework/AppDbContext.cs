@@ -19,11 +19,6 @@ namespace DAL.EntityFramework
 
         public DbSet<AppUser> Users { get; set; }
         public DbSet<IdentityRole> Roles { get; set; }
-        public DbSet<IdentityUserClaim<string>> UserClaims { get; set; }
-        public DbSet<IdentityUserLogin<string>> UserLogins { get; set; }
-        public DbSet<IdentityRoleClaim<string>> RoleClaims { get; set; }
-        public DbSet<IdentityUserToken<string>> UserTokens { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
