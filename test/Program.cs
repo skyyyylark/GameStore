@@ -30,15 +30,7 @@ namespace test
 
             builder.Services.AddBllServices();
 
-            builder.Services.AddIdentity<AppUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddDefaultTokenProviders();
-            builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
-                .AddCookie(options =>
-                {
-                    options.LoginPath = "/api/auth/login";
-                    options.LogoutPath = "/api/auth/logout";
-                });
+            builder.Services.AddIdentityServices();
 
             builder.Services.AddAuthorization();
 
@@ -52,17 +44,7 @@ namespace test
 
             var app = builder.Build();
 
-            using (var scope = app.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                var dbContext = services.GetRequiredService<AppDbContext>();
-                dbContext.Database.Migrate();
-
-                var userManager = services.GetRequiredService<UserManager<AppUser>>();
-                var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-
-                IdentitySeeder.SeedSuperAdmin(userManager, roleManager);
-            }
+            app.Services.SeedIdentityData();
 
             app.AddExceptionHandler();
             app.InitMapping();
