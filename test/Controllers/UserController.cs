@@ -25,16 +25,5 @@ namespace test.Controllers
             return await _userService.Register(model);
         }
 
-        [HttpPost("login")]
-        public async Task<string> Login([FromBody] LoginModel model)
-        {
-            return await _userService.Login(model);
-        }
-
-        [HttpPost("logout")]
-        public async Task<int> Logout()
-        {
-            return await _userService.Logout(); 
-        }
     }
 }
