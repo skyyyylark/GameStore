@@ -10,7 +10,5 @@ namespace Abstractions.Interfaces.Services
     public interface IUserService
     {
         public Task<int> Register(RegisterModel model);
-        public Task<string> Login(LoginModel model);
-        public Task<int> Logout();
     }
 }
