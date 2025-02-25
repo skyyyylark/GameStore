@@ -26,7 +26,7 @@ namespace test.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<int> Login([FromBody] LoginModel model)
+        public async Task<string> Login([FromBody] LoginModel model)
         {
             return await _userService.Login(model);
         }
