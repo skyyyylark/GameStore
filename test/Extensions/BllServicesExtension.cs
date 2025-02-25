@@ -12,6 +12,7 @@ namespace test.Extensions
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
         }
     }
 }
