@@ -31,19 +31,19 @@ namespace test.Controllers
         }
 
         [HttpPost("addCategory")]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<int> AddCategory([FromBody] CategoryDTO category)
         {
             return await _categoryService.AddCategory(category);
         }
         [HttpPut("updateCategory")]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<int> UpdateCategory([FromBody] CategoryDTO category)
         {
             return await _categoryService.UpdateCategory(category);
         }
         [HttpDelete("deleteCategory")]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<int> DeleteCategory(int id)
         {
             return await _categoryService.DeleteCategory(id);
