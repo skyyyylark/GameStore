@@ -20,9 +20,9 @@ namespace test.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            var (accessToken, refreshToken) = await _authService.Login(model);
+            var refreshAndAccess = await _authService.Login(model);
 
-            return Ok(new { AccessToken = accessToken, RefreshToken = refreshToken });
+            return Ok(refreshAndAccess);
         }
 
         [HttpPost("refresh")]

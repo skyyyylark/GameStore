@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Models.DTOs;
 using Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace BLL.Services
         
         private static Dictionary<string, string> _refreshTokens = new Dictionary<string, string>();
 
-        public async Task<(string AccessToken, string RefreshToken)> Login(LoginModel model)
+        public async Task<RefreshAndAccess> Login(LoginModel model)
         {
             var user = await _userManager.FindByNameAsync(model.Username);
             if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
@@ -38,10 +39,15 @@ namespace BLL.Services
 
             var accessToken = new JwtSecurityTokenHandler().WriteToken(GenerateAccessToken(user.UserName));
             var refreshToken = Guid.NewGuid().ToString();
-
+            var refreshAndAccess = new RefreshAndAccess();
+            
             _refreshTokens[refreshToken] = user.UserName;
 
-            return (accessToken, refreshToken);
+            refreshAndAccess.RefreshToken = refreshToken;
+            refreshAndAccess.AccessToken = accessToken;
+
+
+            return refreshAndAccess;
         }
 
 
@@ -76,7 +82,7 @@ namespace BLL.Services
                 issuer: _configuration["JwtSettings:Issuer"],
                 audience: _configuration["JwtSettings:Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(1),
+                expires: DateTime.UtcNow.AddMinutes(15),
                 signingCredentials: new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"])),
                     SecurityAlgorithms.HmacSha256)
