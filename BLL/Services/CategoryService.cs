@@ -2,6 +2,7 @@
 using Abstractions.Interfaces.Services;
 using DAL.EntityFramework;
 using Mapster;
+using Microsoft.Extensions.Localization;
 using Models.DTOs;
 using Models.Entities;
 using System;
@@ -15,9 +16,11 @@ namespace BLL.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryDataSource _categoryDataSource;
-        public CategoryService(ICategoryDataSource categoryDataSource)
+        private readonly IStringLocalizer _localizer;
+        public CategoryService(ICategoryDataSource categoryDataSource, IStringLocalizerFactory factory)
         {
             _categoryDataSource = categoryDataSource;
+            _localizer = factory.Create("Common.Resources.SharedResource", "Common");
         }
         public List<CategoryDTO> GetCategories()
         {
@@ -49,7 +52,7 @@ namespace BLL.Services
         public async Task<CategoryDetailsDTO> GetCategory(int id)
         {
             var category = await _categoryDataSource.GetCategoryWithGames(x => x.Id == id)
-                ?? throw new ArgumentNullException("Категория не найдена или была пустой");
+                ?? throw new ArgumentNullException(_localizer["ArgumentNull"]);
             return category.Adapt<CategoryDetailsDTO>();
         }
     }
