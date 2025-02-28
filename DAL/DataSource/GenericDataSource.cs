@@ -18,7 +18,7 @@ namespace DAL.DataSource
         public GenericDataSource(AppDbContext context, IStringLocalizerFactory factory)
         {
             _context = context;
-            _localizer = factory.Create("Common.Resources.SharedResource", "Common"); ;
+            _localizer = factory.Create("Common.Resources.SharedResource", "Common");
         }
         protected DbSet<T> Set => _context.Set<T>();
 

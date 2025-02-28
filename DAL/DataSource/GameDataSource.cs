@@ -1,6 +1,7 @@
 ﻿using Abstractions.Interfaces.DataSources;
 using DAL.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using Models.DTOs;
 using Models.Entities;
 using System;
@@ -14,7 +15,12 @@ namespace DAL.DataSource
 {
     public class GameDataSource : GenericDataSource<Game>, IGameDataSource
     {
-        public GameDataSource(AppDbContext _context) : base(_context) { }
+        private readonly IStringLocalizer _localizer;
+
+        public GameDataSource(AppDbContext _context, IStringLocalizerFactory factory) : base(_context, factory)
+        {
+            _localizer = factory.Create("Common.Resources.SharedResource", "Common");
+        }
 
         public async Task<GameDetailsDTO> GetGameWithCategory(int id)
         {
@@ -22,7 +28,7 @@ namespace DAL.DataSource
                 .Include(g => g.Category)
                 .FirstOrDefaultAsync(g => g.Id == id);
             if (game == null)
-                throw new KeyNotFoundException($"Игра с id = {id} не найдена");
+                throw new KeyNotFoundException(_localizer["KeyNotFound"]);
             return new GameDetailsDTO
             {
                 Id = game.Id,
