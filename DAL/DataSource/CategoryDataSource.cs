@@ -2,6 +2,7 @@
 using Abstractions.Interfaces.Services;
 using DAL.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace DAL.DataSource
 {
     public class CategoryDataSource : GenericDataSource<Category>, ICategoryDataSource
     {
+
         public CategoryDataSource(AppDbContext _context) : base(_context) { }
 
         public async Task<Category?> GetCategoryWithGames(Expression<Func<Category, bool>> filter)

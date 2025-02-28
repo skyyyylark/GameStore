@@ -22,10 +22,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Abstractions\Abstractions.csproj" />
+    <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 

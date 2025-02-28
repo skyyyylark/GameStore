@@ -16,11 +16,9 @@ namespace BLL.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryDataSource _categoryDataSource;
-        private readonly IStringLocalizer _localizer;
-        public CategoryService(ICategoryDataSource categoryDataSource, IStringLocalizerFactory factory)
+        public CategoryService(ICategoryDataSource categoryDataSource)
         {
             _categoryDataSource = categoryDataSource;
-            _localizer = factory.Create("Common.Resources.SharedResource", "Common");
         }
         public List<CategoryDTO> GetCategories()
         {
@@ -52,7 +50,7 @@ namespace BLL.Services
         public async Task<CategoryDetailsDTO> GetCategory(int id)
         {
             var category = await _categoryDataSource.GetCategoryWithGames(x => x.Id == id)
-                ?? throw new ArgumentNullException(_localizer["ArgumentNull"]);
+                ?? throw new ArgumentNullException();
             return category.Adapt<CategoryDetailsDTO>();
         }
     }

@@ -21,24 +21,22 @@ namespace BLL.Services
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly IStringLocalizer _localizer;
 
-        public UserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IStringLocalizerFactory factory)
+        public UserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _localizer = factory.Create("Common.Resources.SharedResource", "Common");
         }
 
         public async Task<int> Register(RegisterModel model)
         {
             var user = await _userManager.FindByNameAsync(model.Username);
             if (user == null)
-                throw new BadHttpRequestException(_localizer["RegistrationFailure"]);
+                throw new BadHttpRequestException("Reistration failed");
 
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: true, lockoutOnFailure: false);
             if (!result.Succeeded)
-                throw new BadHttpRequestException(_localizer["RegistrationFailure"]);
+                throw new BadHttpRequestException("Reistration failed");
             return StatusCodes.Status200OK;
         }
         

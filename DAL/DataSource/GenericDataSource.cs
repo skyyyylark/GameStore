@@ -8,17 +8,16 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace DAL.DataSource
 {
     public class GenericDataSource<T> : IGenericDataSource<T> where T : class
     {
         protected readonly AppDbContext _context;
-        private readonly IStringLocalizer _localizer;
-        public GenericDataSource(AppDbContext context, IStringLocalizerFactory factory)
+        public GenericDataSource(AppDbContext context)
         {
             _context = context;
-            _localizer = factory.Create("Common.Resources.SharedResource", "Common");
         }
         protected DbSet<T> Set => _context.Set<T>();
 
@@ -38,7 +37,7 @@ namespace DAL.DataSource
         {
             T item = await Set.FindAsync(id);
             if (item == null)
-                throw new KeyNotFoundException(_localizer["KeyNotFound"]);
+                throw new KeyNotFoundException();
             Set.Remove(item);
             await _context.SaveChangesAsync();
             return item;
@@ -48,7 +47,7 @@ namespace DAL.DataSource
         {
             T findingItem = await Set.FindAsync(item);
             if (findingItem == null)
-                throw new ArgumentNullException(_localizer["ArgumentNull"]);
+                throw new ArgumentNullException();
             await Set.AddAsync(findingItem);
             await _context.SaveChangesAsync();
             return item;
@@ -59,7 +58,7 @@ namespace DAL.DataSource
         {
             T item = await Set.FindAsync(id);
             if(item == null)
-                throw new KeyNotFoundException(_localizer["KeyNotFound"]);
+                throw new KeyNotFoundException();
             return item;    
         }
     }

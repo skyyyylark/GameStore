@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using Microsoft.IdentityModel.Tokens;
 using Models.DTOs;
 using Models.Entities;
@@ -26,7 +27,7 @@ namespace BLL.Services
             _userManager = userManager;
             _configuration = configuration;
         }
-        
+
         private static Dictionary<string, string> _refreshTokens = new Dictionary<string, string>();
 
         public async Task<RefreshAndAccess> Login(LoginModel model)
@@ -34,7 +35,7 @@ namespace BLL.Services
             var user = await _userManager.FindByNameAsync(model.Username);
             if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
             {
-                throw new UnauthorizedAccessException("Invalid username or password");
+                throw new UnauthorizedAccessException();
             }
 
             var accessToken = new JwtSecurityTokenHandler().WriteToken(GenerateAccessToken(user.UserName));

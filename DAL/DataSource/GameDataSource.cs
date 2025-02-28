@@ -15,11 +15,9 @@ namespace DAL.DataSource
 {
     public class GameDataSource : GenericDataSource<Game>, IGameDataSource
     {
-        private readonly IStringLocalizer _localizer;
 
-        public GameDataSource(AppDbContext _context, IStringLocalizerFactory factory) : base(_context, factory)
+        public GameDataSource(AppDbContext _context) : base(_context)
         {
-            _localizer = factory.Create("Common.Resources.SharedResource", "Common");
         }
 
         public async Task<GameDetailsDTO> GetGameWithCategory(int id)
@@ -28,7 +26,7 @@ namespace DAL.DataSource
                 .Include(g => g.Category)
                 .FirstOrDefaultAsync(g => g.Id == id);
             if (game == null)
-                throw new KeyNotFoundException(_localizer["KeyNotFound"]);
+                throw new KeyNotFoundException();
             return new GameDetailsDTO
             {
                 Id = game.Id,

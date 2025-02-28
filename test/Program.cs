@@ -69,6 +69,7 @@ namespace test
 
             var app = builder.Build();
 
+
             app.Services.SeedIdentityData();
 
             app.AddExceptionHandler();
