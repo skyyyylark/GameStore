@@ -14,6 +14,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Resources;
 
 namespace BLL.Services
 {
@@ -35,7 +36,7 @@ namespace BLL.Services
             var user = await _userManager.FindByNameAsync(model.Username);
             if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
             {
-                throw new UnauthorizedAccessException();
+                throw new UnauthorizedAccessException(string.Format(ErrorMessages.Unauthorized));
             }
 
             var accessToken = new JwtSecurityTokenHandler().WriteToken(GenerateAccessToken(user.UserName));

@@ -65,8 +65,6 @@ namespace test
                 });
 
 
-
-
             var app = builder.Build();
 
 
