@@ -59,9 +59,36 @@ namespace Common.Resources {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
-        ///   Looks up a localized string similar to Incorrect login or password.
+        ///   Looks up a localized string similar to The entity is null.
+        /// </summary>
+        public static string ArgNull {
+            get {
+                return ResourceManager.GetString("ArgNull", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Object not found.
+        /// </summary>
+        public static string KeyNotFound {
+            get {
+                return ResourceManager.GetString("KeyNotFound", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Registration error.
+        /// </summary>
+        public static string RegFailed {
+            get {
+                return ResourceManager.GetString("RegFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Authorization failed.
         /// </summary>
         public static string Unauthorized {
             get {

@@ -2,9 +2,12 @@ using Abstractions.Interfaces.Services;
 using BLL.Services;
 using DAL.EntityFramework;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Models.Entities;
 using Serilog;
+using System.Globalization;
 using test.Extensions;
 
 namespace test
@@ -34,39 +37,28 @@ namespace test
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c =>
+
+            builder.Services.AddSwaggerConfiguration();
+
+            builder.Services.AddLocalization(options => options.ResourcesPath = "..\\Common\\Resources");
+
+            var supportedCultures = new[]
             {
-                c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-                {
-                    Description = "¬ведите JWT токен в формате: Bearer {token}",
-                    Name = "Authorization",
-                    In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-                    Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
-                });
+                new CultureInfo("en"),
+                new CultureInfo("ru")
+            };
 
-                c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement()
-                {
-                    {
-                        new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-                        {
-                            Reference = new Microsoft.OpenApi.Models.OpenApiReference
-                            {
-                                Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            },
-                            Scheme = "oauth2",
-                            Name = "Bearer",
-                            In = Microsoft.OpenApi.Models.ParameterLocation.Header
-                        },
-                        new List<string>()
-                    }
-                });
-                });
-
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new RequestCulture("ru");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
 
             var app = builder.Build();
 
+            var localizationOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value;
+            app.UseRequestLocalization(localizationOptions);
 
             app.Services.SeedIdentityData();
 

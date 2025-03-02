@@ -14,6 +14,8 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.AccessControl;
+using Common.Resources;
 
 namespace BLL.Services
 {
@@ -32,11 +34,11 @@ namespace BLL.Services
         {
             var user = await _userManager.FindByNameAsync(model.Username);
             if (user == null)
-                throw new BadHttpRequestException("Reistration failed");
+                throw new BadHttpRequestException(ErrorMessages.RegFailed);
 
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: true, lockoutOnFailure: false);
             if (!result.Succeeded)
-                throw new BadHttpRequestException("Reistration failed");
+                throw new BadHttpRequestException(ErrorMessages.RegFailed);
             return StatusCodes.Status200OK;
         }
         

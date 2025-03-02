@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ArgNull" xml:space="preserve">
-    <value>The entity is null</value>
+    <value>The object is null</value>
   </data>
   <data name="KeyNotFound" xml:space="preserve">
     <value>Object not found</value>
   </data>
   <data name="RegFailed" xml:space="preserve">
-    <value>Registration error</value>
+    <value>Registration failed</value>
   </data>
   <data name="Unauthorized" xml:space="preserve">
-    <value>Authorization failed</value>
+    <value>Incorrect login or password</value>
   </data>
 </root>

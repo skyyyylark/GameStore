@@ -1,5 +1,6 @@
 ﻿using Abstractions.Interfaces.DataSources;
 using Abstractions.Interfaces.Services;
+using Common.Resources;
 using DAL.EntityFramework;
 using Mapster;
 using Microsoft.Extensions.Localization;
@@ -50,7 +51,7 @@ namespace BLL.Services
         public async Task<CategoryDetailsDTO> GetCategory(int id)
         {
             var category = await _categoryDataSource.GetCategoryWithGames(x => x.Id == id)
-                ?? throw new ArgumentNullException();
+                ?? throw new ArgumentNullException(string.Format(ErrorMessages.ArgNull));
             return category.Adapt<CategoryDetailsDTO>();
         }
     }

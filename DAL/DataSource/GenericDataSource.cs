@@ -1,4 +1,5 @@
 ﻿using Abstractions.Interfaces.DataSources;
+using Common.Resources;
 using DAL.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
@@ -37,7 +38,7 @@ namespace DAL.DataSource
         {
             T item = await Set.FindAsync(id);
             if (item == null)
-                throw new KeyNotFoundException();
+                throw new KeyNotFoundException(ErrorMessages.KeyNotFound);
             Set.Remove(item);
             await _context.SaveChangesAsync();
             return item;
@@ -47,7 +48,7 @@ namespace DAL.DataSource
         {
             T findingItem = await Set.FindAsync(item);
             if (findingItem == null)
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(ErrorMessages.ArgNull);
             await Set.AddAsync(findingItem);
             await _context.SaveChangesAsync();
             return item;
@@ -58,7 +59,7 @@ namespace DAL.DataSource
         {
             T item = await Set.FindAsync(id);
             if(item == null)
-                throw new KeyNotFoundException();
+                throw new KeyNotFoundException(ErrorMessages.KeyNotFound);
             return item;    
         }
     }

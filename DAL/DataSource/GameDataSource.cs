@@ -1,4 +1,5 @@
 ﻿using Abstractions.Interfaces.DataSources;
+using Common.Resources;
 using DAL.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
@@ -26,7 +27,7 @@ namespace DAL.DataSource
                 .Include(g => g.Category)
                 .FirstOrDefaultAsync(g => g.Id == id);
             if (game == null)
-                throw new KeyNotFoundException();
+                throw new KeyNotFoundException(ErrorMessages.KeyNotFound);
             return new GameDetailsDTO
             {
                 Id = game.Id,
