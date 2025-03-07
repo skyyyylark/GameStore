@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace BLL.Services
         public static async Task SeedSuperAdmin(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             string email = "superadmin@example.com";
-            string password = "SuperAdmin123!";
+            string password = "SuperAdmin123!"; //configuration["AdminCredentials:AdminPassword"];
             string roleName = "SuperAdmin";
 
             if (!await roleManager.RoleExistsAsync(roleName))
@@ -26,7 +27,7 @@ namespace BLL.Services
             {
                 user = new AppUser
                 {
-                    UserName = email,
+                    UserName = email, //configuration["AdminCredentials:Username"],
                     Email = email,
                     FullName = "Главный Администратор",
                     EmailConfirmed = true

@@ -29,7 +29,7 @@ namespace Common.Resources {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public ErrorMessages() {
+        internal ErrorMessages() {
         }
         
         /// <summary>
@@ -59,7 +59,7 @@ namespace Common.Resources {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The entity is null.
         /// </summary>
@@ -68,7 +68,7 @@ namespace Common.Resources {
                 return ResourceManager.GetString("ArgNull", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Object not found.
         /// </summary>
@@ -77,7 +77,16 @@ namespace Common.Resources {
                 return ResourceManager.GetString("KeyNotFound", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to qwe.
+        /// </summary>
+        public static string qwe {
+            get {
+                return ResourceManager.GetString("qwe", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Registration error.
         /// </summary>
@@ -86,7 +95,25 @@ namespace Common.Resources {
                 return ResourceManager.GetString("RegFailed", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string some {
+            get {
+                return ResourceManager.GetString("some", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Authorization failed.
         /// </summary>

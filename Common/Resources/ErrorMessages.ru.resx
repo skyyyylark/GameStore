@@ -123,8 +123,17 @@
   <data name="KeyNotFound" xml:space="preserve">
     <value>Объект не найден</value>
   </data>
+  <data name="qwe" xml:space="preserve">
+    <value>qwe</value>
+  </data>
   <data name="RegFailed" xml:space="preserve">
     <value>Регистрация не удалась</value>
+  </data>
+  <data name="some" xml:space="preserve">
+    <value>as</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>q</value>
   </data>
   <data name="Unauthorized" xml:space="preserve">
     <value>Неверный логин или пароль</value>

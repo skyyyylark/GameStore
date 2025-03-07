@@ -18,7 +18,6 @@ namespace test
         {
             var builder = WebApplication.CreateBuilder(args);
 
-
             // Add services to the container.
             builder.AddSerilogLogging();
 
@@ -59,7 +58,7 @@ namespace test
 
             var localizationOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value;
             app.UseRequestLocalization(localizationOptions);
-
+            
             app.Services.SeedIdentityData();
 
             app.AddExceptionHandler();
